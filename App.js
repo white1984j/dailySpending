@@ -9,6 +9,8 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
+import firebase from 'react-native-firebase';
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
@@ -18,15 +20,30 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
-  }
+
+    componentDidMount() {
+        this.auth();
+    }
+
+    auth = async () => {
+        console.log(123123);
+        firebase
+            .auth()
+            .signInWithEmailAndPassword('white1984j@gmail.com', '123456')
+            .then(asd => console.log('---', asd))
+            .catch((e) => console.log(e))
+        console.log(123123);
+    };
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.welcome}>Welcome to React Native 123!</Text>
+                <Text style={styles.instructions}>To get started, edit App.js</Text>
+                <Text style={styles.instructions}>{instructions}</Text>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
